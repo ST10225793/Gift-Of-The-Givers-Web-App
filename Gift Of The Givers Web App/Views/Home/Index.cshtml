@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Gift of the Givers - Welcome";
+}
+
+<style>
+    body {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .make-difference-button {
+        background-color: yellow; /* Yellow background */
+        color: green; /* Green text color */
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        position: absolute; /* Position it absolutely */
+        top: 20px; /* Align with the logo vertically */
+        left: calc(100% - 200px); /* Align with the logo horizontally */
+        font-weight: bold; /* Make text bold */
+    }
+
+        .make-difference-button:hover {
+            background-color: #f7e74b; /* Slightly darker yellow on hover */
+        }
+</style>
+
+<div style="max-width: 1200px; margin: auto; padding: 20px;">
+    <!-- Logo at the top left corner -->
+    <div style="text-align: left;">
+        <img src="~/images/GiftofTheGivers_logo.png" alt="Gift of the Givers Logo" style="width: 150px;" />
+    </div>
+
+    <!-- "Make a Difference" Button -->
+    <a href="@Url.Action("MakeADifference", "Home")" class="make-difference-button">Make a Difference</a>
+
+    <!-- Welcome message -->
+    <div style="text-align:center; margin-top:30px;">
+        <h1>Welcome to the Gift of the Givers Foundation</h1>
+        <p style="font-size:18px; margin:20px 0;">
+            The Gift of the Givers Foundation is dedicated to providing swift and effective aid to communities in crisis.
+            Our mission is to offer compassion and resilience, rebuilding lives and communities affected by natural disasters and emergencies.
+        </p>
+
+        <!-- Picture showcasing the foundation's work -->
+        <div style="margin: 20px 0;">
+            <img src="~/images/gift-of-the-givers.jpg" alt="Gift of the Givers at work" style="width: 100%; max-width: 800px; height: auto;" />
+        </div>
+
+        <p style="font-size:16px;">
+            Join us as we embark on an innovative journey to centralise relief efforts, coordinate volunteers, and manage resources effectively.
+            Together, we can make a difference in disaster relief in South Africa and beyond.
+        </p>
+
+        <!-- Tagline above the registration button -->
+        <h3 style="margin-top: 40px; color: #2c3e50;">register with us today!</h3>
+
+        <!-- Register and Login buttons -->
+        <div style="margin-top:20px;">
+            <a href="@Url.Action("Register", "Home")" class="btn btn-primary" style="margin-right:15px; padding: 10px 20px;">
+                Register
+            </a>
+            <a href="@Url.Action("Login", "Home")" class="btn btn-success" style="padding: 10px 20px;">
+                Login
+            </a>
+        </div>
+    </div>
+</div>
