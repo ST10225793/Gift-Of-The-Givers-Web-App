@@ -14,7 +14,7 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    dotnet build Gift Of The Givers Web App.sln
+    dotnet build "Gift Of The Givers Web App.sln"
   displayName: 'Build the project'
 
 - script: |
