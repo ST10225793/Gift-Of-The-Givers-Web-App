@@ -43,7 +43,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
-    projects: '**/Gift\ Of\ The\ Givers\ Web\ App/Gift\ Of\ The\ Givers\ Web\ App.csproj'  # Using backslashes to escape spaces
+    projects: '"**/Gift Of The Givers Web App/Gift Of The Givers Web App.csproj"'  # Use quotes for paths with spaces
     publishWebProjects: true
     arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: true
