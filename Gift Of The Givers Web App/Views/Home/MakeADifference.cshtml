@@ -1,5 +1,123 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewBag.Title = "Make a Difference";
 }
+
+<!-- Include Font Awesome CSS (if not already included in your layout) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+    body {
+        font-family: "Times New Roman", Times, serif;
+        background-color: #f8f9fa;
+        color: #333;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 48px;
+        color: #2ecc71; /* Green color */
+        margin-top: 50px;
+    }
+
+    h3 {
+        font-size: 16px;
+        color: #777; /* Fine print color */
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .button-column {
+        flex: 1; /* This will make two buttons per row */
+        max-width: 200px; /* Set a max-width for buttons */
+        margin: 10px; /* Add some spacing between buttons */
+        text-align: center;
+    }
+
+    .button {
+        display: inline-block;
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 100%; /* Stretch to full width of the column */
+        position: relative; /* For positioning icon */
+    }
+
+        .button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .button i {
+            color: yellow; /* Yellow icon */
+            margin-right: 8px; /* Space between icon and text */
+        }
+
+    .description {
+        max-width: 800px;
+        margin: auto;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+    }
+
+    img {
+        width: 100%; /* Stretches the image horizontally */
+        max-height: 400px; /* Optional: sets a maximum height for the image */
+        object-fit: cover; /* Maintains aspect ratio */
+        margin-bottom: 30px;
+    }
+</style>
+
+<div>
+    <!-- Header -->
+    <h1>Make a Difference</h1>
+    <h3>Help those in need</h3>
+
+    <!-- Stretched Image -->
+    <img src="~/images/MakeADifference.jpg" alt="Making a Difference" />
+
+    </div>
+    <div class="description">
+    <p>
+        Making a difference means taking action to improve the lives of others, whether through volunteering, donations, or simply offering support in times of need. At Gift of The Givers, we believe that every small act of kindness can lead to significant changes in the world around us.
+    </p>
+    </div>
+
+<!-- Horizontal Button Container -->
+<div class="button-container">
+    <div class="button-column">
+        <a href="@Url.Action("DisasterIncidentReporting", "Home")" class="button">
+            <i class="fas fa-exclamation-triangle"></i> <!-- Icon for Disaster Reporting -->
+            Disaster Incident Reporting
+        </a>
+    </div>
+    <div class="button-column">
+        <a href="@Url.Action("ResourceDonation", "Home")" class="button">
+            <i class="fas fa-gift"></i> <!-- Icon for Resource Donation -->
+            Resource Donation
+        </a>
+    </div>
+    <div class="button-column">
+        <a href="@Url.Action("VolunteerManagement", "Home")" class="button">
+            <i class="fas fa-users"></i> <!-- Icon for Volunteer Management -->
+            Volunteer Management
+        </a>
+    </div>
+
+
+    <!-- Description -->
+    <div class="description">
+        <p>
+            Our mission is to provide swift and effective aid to communities facing crises, particularly in South Africa. We strive to empower those in need by providing essential resources, offering emotional support, and fostering resilience. Join us in our journey to spread compassion and rebuild lives. Together, we can make a lasting impact on the lives of many.
+        </p>
+    </div>
+

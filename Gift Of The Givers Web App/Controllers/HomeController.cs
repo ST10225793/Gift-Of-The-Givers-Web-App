@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using Gift_Of_The_Givers_Web_App.Data;
+using Gift_Of_The_Givers_Web_App.Services;
+using Gift_Of_The_Givers_Web_App.ViewModels;
 
 namespace Gift_Of_The_Givers_Web_App.Controllers
 {
@@ -17,13 +19,22 @@ namespace Gift_Of_The_Givers_Web_App.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly GiftOfTheGiversContext _context;
+        private readonly IIncidentReportService _incidentReportService;
+        private readonly IVolunteerService _volunteerService;
+        private readonly IDonationService _donationService;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, GiftOfTheGiversContext context)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, GiftOfTheGiversContext context, IIncidentReportService incidentReportService, IVolunteerService volunteerService, IDonationService donationService, IUserService userService)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _incidentReportService = incidentReportService;
+            _volunteerService = volunteerService;
+            _donationService = donationService;
+            _userService = userService;
+
         }
 
         public IActionResult Index()
@@ -131,6 +142,116 @@ namespace Gift_Of_The_Givers_Web_App.Controllers
             }
             return View(model); // Return to the view with model errors
         }
+
+        // GET: Home/MakeADifference
+        public IActionResult MakeADifference()
+        {
+            return View();
+        }
+
+        [Authorize] // Ensure only authenticated users can access this
+        public IActionResult DisasterIncidentReporting()
+        {
+            return View(new IncidentReport());
+        }
+
+        // POST: Submit Incident Report
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SubmitIncidentReport(IncidentReport model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Retrieve the UserID from claims if not passed in the model
+                model.UserID = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+                // Create an instance of IncidentReport to save
+                var incidentReport = new IncidentReport
+                {
+                    UserID = model.UserID,
+                    Location = model.Location,
+                    Description = model.Description,
+                    Severity = model.Severity,
+                    IncidentDate = model.IncidentDate
+                };
+
+                // Call the service to add the incident report
+                await _incidentReportService.AddIncidentReportAsync(incidentReport);
+
+                // Redirect to a confirmation page or back to the reporting page
+                return RedirectToAction("Index"); // Adjust to your actual action
+            }
+
+            // If the model is not valid, return the view with the current model
+            return View(model);
+        }
+
+
+
+        // POST: ResourceDonation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResourceDonation(Donation donation)
+        {
+            if (ModelState.IsValid)
+            {
+                donation.Date = DateTime.Now; // Set current date
+                donation.Status = "Pending"; // Set default status
+                _context.Donation.Add(donation); 
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index"); // Redirect to an appropriate action
+            }
+            return View(donation);
+        }
+
+        // Confirmation page after successful donation
+        public IActionResult DonationConfirmation()
+        {
+            return View();
+        }
+
+
+
+        [Authorize]
+        public async Task<IActionResult> VolunteerManagement()
+        {
+            var availableTasks = await _volunteerService.GetAvailableTasksAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Get the logged-in user ID
+            var userContributions = await _volunteerService.GetUserContributionsAsync(userId);
+
+            var model = new VolunteerManagementViewModel
+            {
+                AvailableTasks = availableTasks,
+                UserContributions = userContributions
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SignUpForTask(int TaskID)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);  // Get the logged-in user ID
+            await _volunteerService.SignUpForTaskAsync(userId, TaskID);
+
+            return RedirectToAction("VolunteerManagement");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> RegisterVolunteer(VolunteerRegistration model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _volunteerService.RegisterVolunteerAsync(model);
+                return RedirectToAction("VolunteerManagement");
+            }
+
+            return View(model);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

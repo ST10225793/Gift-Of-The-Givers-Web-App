@@ -1,0 +1,86 @@
+﻿@using System.Security.Claims
+
+@model Gift_Of_The_Givers_Web_App.Models.IncidentReport
+@{
+    ViewBag.Title = "Disaster Incident Reporting";
+}
+
+<style>
+    body {
+        font-family: "Times New Roman", Times, serif;
+        margin: 20px;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .btn {
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+</style>
+
+<div class="form-container">
+    <h1>Report an Incident</h1>
+
+    <form asp-action="SubmitIncidentReport" method="post">
+        <div class="form-group">
+            <label asp-for="Location"></label>
+            <input asp-for="Location" class="form-control" required />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="4" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Severity"></label>
+            <select asp-for="Severity" class="form-control" required>
+                <option value="">Select Severity</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+            <span asp-validation-for="Severity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IncidentDate"></label>
+            <input asp-for="IncidentDate" type="date" class="form-control" required />
+            <span asp-validation-for="IncidentDate" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" asp-for="UserID" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+
+        <button type="submit" class="btn">Submit Report</button>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

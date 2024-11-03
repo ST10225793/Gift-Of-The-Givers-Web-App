@@ -1,5 +1,6 @@
 using Gift_Of_The_Givers_Web_App.Data;
 using Gift_Of_The_Givers_Web_App.Models;
+using Gift_Of_The_Givers_Web_App.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,16 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Home/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+builder.Services.AddScoped<IIncidentReportService, IncidentReportService>();
+
+builder.Services.AddScoped<IDonationService, DonationService>();
+
+builder.Services.AddScoped<IVolunteerService, VolunteerService>();
+
+builder.Services.AddScoped<IReliefProjectService, ReliefProjectService>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
