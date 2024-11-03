@@ -49,11 +49,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-
-- task: AzureWebApp@1
-  displayName: 'Deploy to Azure Web App'
-  inputs:
-    azureSubscription: '<ADvTECH-Tertiary Rosebank College>'
-    appType: 'webApp'
-    AppName: '<Gift Of The Givers Web App>'
-    package: '$(System.ArtifactsDirectory)/drop/*.zip'
