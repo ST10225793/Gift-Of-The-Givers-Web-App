@@ -22,7 +22,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '8.0.x'
+    version: '8.0.0'  # Specify the exact version
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: DotNetCoreCLI@2
@@ -34,18 +34,20 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'  # Specify build configuration
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'  # Specify build configuration
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     projects: '"D:\a\1\s\Gift Of The Givers Web App\Gift Of The Givers Web App.csproj"'  # Use quotes for paths with spaces
     publishWebProjects: true
-    arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'  # Use variable for consistency
     zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
