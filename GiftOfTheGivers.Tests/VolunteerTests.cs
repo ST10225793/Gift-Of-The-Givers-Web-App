@@ -29,7 +29,7 @@ namespace Gift_Of_The_Givers_Web_App.Tests
                 Skills = "First Aid, Communication",
                 User = new User 
                 {
-                    UserId = 4,
+                    UserID = 4,
                     Username = "marry poppin"
                 }
             };

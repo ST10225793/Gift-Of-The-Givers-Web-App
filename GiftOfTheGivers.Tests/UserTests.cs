@@ -11,7 +11,7 @@ namespace Gift_Of_The_Givers_Web_App.Tests
         {
             return new User
             {
-                UserId = 1,
+                UserID = 1,
                 Username = "TestUser",
                 Password = "TestPassword123",
                 ConfirmPassword = "TestPassword123",

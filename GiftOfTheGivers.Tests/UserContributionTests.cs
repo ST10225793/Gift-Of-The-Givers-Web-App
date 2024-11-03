@@ -30,7 +30,7 @@ namespace Gift_Of_The_Givers_Web_App.Tests
                 Status = "Completed",
                 User = new User // Assuming you have a User class that can be instantiated
                 {
-                    UserId = 4,
+                    UserID = 4,
                     Username = "marry poppin"
                 }
             };

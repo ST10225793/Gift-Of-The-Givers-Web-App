@@ -33,5 +33,10 @@ namespace Gift_Of_The_Givers_Web_App.Data
             
         }
 
+        // Add a parameterless constructor
+        public GiftOfTheGiversContext() : base(new DbContextOptions<GiftOfTheGiversContext>())
+        {
+        }
+
     }
 }

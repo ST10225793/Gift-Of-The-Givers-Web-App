@@ -23,6 +23,8 @@ namespace Gift_Of_The_Givers_Web_App.Controllers
         private readonly IVolunteerService _volunteerService;
         private readonly IDonationService _donationService;
         private readonly IUserService _userService;
+        private UserManager<User> object1;
+        private SignInManager<User> object2;
 
         public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, SignInManager<User> signInManager, GiftOfTheGiversContext context, IIncidentReportService incidentReportService, IVolunteerService volunteerService, IDonationService donationService, IUserService userService)
         {
@@ -36,6 +38,7 @@ namespace Gift_Of_The_Givers_Web_App.Controllers
             _userService = userService;
 
         }
+
 
         public IActionResult Index()
         {
@@ -121,7 +124,7 @@ namespace Gift_Of_The_Givers_Web_App.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(model.UserId.ToString());
+                var user = await _userManager.FindByIdAsync(model.UserID.ToString());
                 if (user == null)
                 {
                     return NotFound();

@@ -5,7 +5,7 @@ namespace Gift_Of_The_Givers_Web_App.Models
 {
     public class User : IdentityUser
     {
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         [Required(ErrorMessage = "Username is required.")]
         [StringLength(50, ErrorMessage = "Username must be less than 50 characters.")]

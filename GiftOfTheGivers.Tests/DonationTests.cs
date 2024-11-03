@@ -76,11 +76,11 @@ namespace Gift_Of_The_Givers_Web_App.Tests
         public void Donation_Should_LinkToUser()
         {
             // Arrange
-            var user = new User { UserId = 123, Username = "TestUser" };
+            var user = new User { UserID = 123, Username = "TestUser" };
             var donation = new Donation { Users = user };
 
             // Act & Assert
-            Assert.Equal(user.UserId, donation.Users.UserId);
+            Assert.Equal(user.UserID, donation.Users.UserID);
             Assert.Equal(user.Username, donation.Users.Username);
         }
     }
