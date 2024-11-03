@@ -9,6 +9,6 @@ namespace Gift_Of_The_Givers_Web_App.Models
 
         [Required]
         [EmailAddress]
-        public string Email { get; set; } = string.Empty
+        public string Email { get; set; } = string.Empty;
     } 
 }
