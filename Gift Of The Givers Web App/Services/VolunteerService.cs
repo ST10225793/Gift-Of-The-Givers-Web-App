@@ -52,7 +52,7 @@ namespace Gift_Of_The_Givers_Web_App.Services
         {
             var volunteer = new Volunteer
             {
-                UserID = model.UserID,
+                UserId = model.UserID,
                 Name = model.Name,
                 Email = model.Email,
                 Phone = model.Phone,

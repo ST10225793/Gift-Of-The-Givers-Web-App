@@ -22,7 +22,7 @@ namespace Gift_Of_The_Givers_Web_App.Tests
             var volunteer = new Volunteer
             {
                 VolunteerID = 1,
-                UserID = 101,
+                UserId = 101,
                 Name = "Marry Poppin",
                 Email = "marryp@example.com",
                 Phone = "123-456-7890",
@@ -36,7 +36,7 @@ namespace Gift_Of_The_Givers_Web_App.Tests
 
             // Act & Assert
             Assert.Equal(1, volunteer.VolunteerID);
-            Assert.Equal(101, volunteer.UserID);
+            Assert.Equal(101, volunteer.UserId);
             Assert.Equal("Marry Poppin", volunteer.Name);
             Assert.Equal("marryp@example.com", volunteer.Email);
             Assert.Equal("123-456-7890", volunteer.Phone);
